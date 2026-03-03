@@ -1,0 +1,50 @@
+<idea-plugin>
+    <id>com.github.pythondocgen</id>
+    <name>Python DocGen AI</name>
+    <vendor email="your@email.com">Your Name</vendor>
+
+    <description><![CDATA[
+        Genera automaticamente docstring per le funzioni Python usando Claude AI.<br><br>
+        <b>Come usarlo:</b>
+        <ol>
+            <li>Vai in <b>Settings → Tools → Python DocGen AI</b> e inserisci la tua API key</li>
+            <li>Posiziona il cursore su una funzione Python</li>
+            <li>Usa <b>Alt+Shift+D</b> oppure click destro → "Generate Docstring (AI)"</li>
+        </ol>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>PythonCore</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService
+                serviceImplementation="com.github.pythondocgen.services.DocGenSettings"/>
+
+        <applicationConfigurable
+                parentId="tools"
+                instance="com.github.pythondocgen.settings.DocGenConfigurable"
+                id="com.github.pythondocgen.settings"
+                displayName="Python DocGen AI"/>
+
+        <notificationGroup id="PythonDocGen" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="PythonDocGen.GenerateDocstring"
+                class="com.github.pythondocgen.actions.GenerateDocstringAction"
+                text="Generate Docstring (AI)"
+                description="Genera una docstring AI per la funzione Python corrente">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <add-to-group group-id="CodeMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt shift D"/>
+        </action>
+
+        <action id="PythonDocGen.GenerateAllDocstrings"
+                class="com.github.pythondocgen.actions.GenerateAllDocstringsAction"
+                text="Generate All Docstrings (AI)"
+                description="Genera docstring AI per tutte le funzioni del file corrente">
+            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="PythonDocGen.GenerateDocstring"/>
+            <add-to-group group-id="CodeMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
