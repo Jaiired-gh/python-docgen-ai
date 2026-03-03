@@ -69,7 +69,7 @@ Automatically generate Python docstrings using AI, powered by Groq (Llama 3.3 70
 
 ## License
 
-Distributed under the **Apache License 2.0**. See `LICENSE` for more information.
+Distributed under the **MIT License**. See `LICENSE` for more information.
 
 ---
 
